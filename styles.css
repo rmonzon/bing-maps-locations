@@ -1,0 +1,23 @@
+body, html {
+    margin: 0;
+    font-family: Verdana;
+}
+
+#myMap {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 50px auto;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    background-color: #283e4a;
+    color: white;
+    font-size: 17px;
+    font-style: italic;
+    text-align: center;
+}
