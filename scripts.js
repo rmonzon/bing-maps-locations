@@ -1,32 +1,62 @@
+const bingMapsKey = 'AqWC3CDZCmuhIZGDAXG_SM_tEfrtk-OVXwDf4XCypJhu0A7RzIHgJpVgJhbIPpY5';
+const offices = [
+    { name: 'LinkedIn HQ', address: '1000 W Maude Ave, Sunnyvale, CA 94085' }, { name: 'LinkedIn SF', address: '222 2nd St, San Francisco, CA 94105' }
+];
+let map;
+
 function getMap() {
-    let map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-        credentials: 'AqWC3CDZCmuhIZGDAXG_SM_tEfrtk-OVXwDf4XCypJhu0A7RzIHgJpVgJhbIPpY5',
-        center: new Microsoft.Maps.Location(47.6149, -122.1941),
+    createPins();
+    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+        credentials: bingMapsKey,
+        center: new Microsoft.Maps.Location(37.39264, -122.0423), // currently hardcoded center
     });
-    const center = map.getCenter();
+}
 
-    //Create an infobox at the center of the map but don't show it.
-    infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
-        visible: false
+function createPins() {
+    offices.map(office => {
+        getGeoCode(office.address);
     });
+}
 
-    //Assign the infobox to a map instance.
-    infobox.setMap(map);
+function getGeoCode(query) {
+    var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Locations?query=" + encodeURIComponent(query) + "&jsonp=geocodeCallback&key=" + bingMapsKey;
+    callRestService(geocodeRequest, geocodeCallback);
+}
 
-    //Create custom Pushpin
-    let pin = new Microsoft.Maps.Pushpin(center);
+function geocodeCallback(response) {
+    if (response &&
+        response.resourceSets &&
+        response.resourceSets.length > 0 &&
+        response.resourceSets[0].resources) {
+        var results = response.resourceSets[0].resources;
+        //Create an infobox at the center of the map but don't show it.
+        infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false
+        });
+        //Assign the infobox to a map instance.
+        infobox.setMap(map);
+        const pinSettings = {
+            altitude: 0,
+            altitudeReference: -1,
+            latitude: results[0].point.coordinates[0],
+            longitude: results[0].point.coordinates[1],
+            iconStyle: 65
+        };
+        const pin = new Microsoft.Maps.Pushpin(pinSettings);
+        pin.metadata = {
+            title: offices[0].name,
+            description: results[0].name,
+        };
+        Microsoft.Maps.Events.addHandler(pin, 'click', pushpinClicked);
+        map.entities.push(pin);
+    }
+}
 
-    //Store some metadata with the pushpin.
-    pin.metadata = {
-        title: 'LinkedIn HQ',
-        description: '1000 W Maude Ave, Sunnyvale, CA 94085',
-    };
-
-    //Add a click event handler to the pushpin.
-    Microsoft.Maps.Events.addHandler(pin, 'click', pushpinClicked);
-
-    //Add pushpin to the map.
-    map.entities.push(pin);
+function callRestService(request) {
+    var script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("src", request);
+    document.body.appendChild(script);
 }
 
 function pushpinClicked(e) {
