@@ -19,7 +19,7 @@ function createPins() {
 }
 
 function getGeoCode(query) {
-    var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Locations?query=" + encodeURIComponent(query) + "&jsonp=geocodeCallback&key=" + bingMapsKey;
+    var geocodeRequest = "https://dev.virtualearth.net/REST/v1/Locations?query=" + encodeURIComponent(query) + "&jsonp=geocodeCallback&key=" + bingMapsKey;
     callRestService(geocodeRequest, geocodeCallback);
 }
 
