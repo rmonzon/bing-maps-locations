@@ -3,7 +3,7 @@ body, html {
     font-family: Verdana;
 }
 
-#myMap {
+#myMap, .iframeMap {
     position: relative;
     width: 600px;
     height: 400px;
