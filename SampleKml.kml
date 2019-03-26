@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" standalone="yes" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2000/xmlns/">
+    <Document>
+        <Folder>
+            <Placemark>
+                <name>LinkedIn Sunnyvale</name>
+                <description>LinkedIn main campus and headquarters</description>
+                <Point>
+                    <coordinates>-122.0420213,37.3926656</coordinates>
+                </Point>
+            </Placemark>
+            <!-- <Placemark>
+                <name>LinkedIn San Francisco</name>
+                <description>LinkedIn San Fracisco Office</description>
+                <Point>
+                    <coordinates>-122.39823,37.78631</coordinates>
+                </Point>
+            </Placemark> -->
+            <!-- <Placemark>
+                <name>LinkedIn New York</name>
+                <description>This is LinkedIn 3rd engineering office, located in the Empire State Building</description>
+                <Point>
+                    <coordinates>-73.985651,40.748407</coordinates>
+                </Point>
+            </Placemark> -->
+        </Folder>
+    </Document>
+</kml>

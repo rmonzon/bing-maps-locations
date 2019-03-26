@@ -1,0 +1,20 @@
+﻿{
+  "mapOptions": {
+    "center": "37.3926656,-122.0420213",
+    "zoom": 10,
+    "credentials": "AqWC3CDZCmuhIZGDAXG_SM_tEfrtk-OVXwDf4XCypJhu0A7RzIHgJpVgJhbIPpY5"
+  },
+  "modules": [
+    {
+      "moduleName": "Microsoft.Maps.Isochrone"
+    },
+    {
+      "moduleName": "Microsoft.Maps.GeoXml",
+      "moduleOptions": [
+        {
+          "addLayerFromUrl": "http://localhost:8080/SampleKml.kml"
+        }
+      ]
+    }
+  ]
+}
